@@ -51,13 +51,13 @@ CREATE TABLE EmployeeTraining (
 );
 
 CREATE TABLE EmployeeTrainingContact (
-	Id int NOT NULL AUTO_INCREMENT COMMENT '',
-    EmployeeTrainingId int NOT NULL COMMENT '',
-    Type smallint NOT NULL COMMENT '',
-    Contact varchar(100) NOT NULL COMMENT '',
-    MainContact int NOT NULL default 0 COMMENT '',
+	Id int NOT NULL AUTO_INCREMENT COMMENT 'Identificador do contato',
+    EmployeeTrainingId int NOT NULL COMMENT 'Identificador do funcionário',
+    Type smallint NOT NULL COMMENT 'Tipo do contato <1>E-mail, <2>Telefone Fixo e <3>Celular',
+    Contact varchar(100) NOT NULL COMMENT 'Conteúdo do contato',
+    MainContact int NOT NULL default 0 COMMENT 'Contato principal <0>Não, <1>Sim',
     PRIMARY KEY (Id),
     
     KEY FK_EmployeeTrainingContact_FK_EmployeeTrainingId (EmployeeTrainingId),
     CONSTRAINT FK_EmployeeTrainingContact_EmployeeTrainingId FOREIGN KEY (EmployeeTrainingId) references EmployeeTraining (Id)
-)
+);
