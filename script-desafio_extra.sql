@@ -46,7 +46,7 @@ Insert into EmployeeTrainingPayroll (EmployeeTrainingId, PayDate, AmountPaid)
 Insert into EmployeeTrainingPayroll (EmployeeTrainingId, PayDate, AmountPaid)
     Values (4, '2023-01-05', 17.500);
 
-
+#CONSULTAS
 SELECT * FROM EmployeeTraining; 
 #et.
 SELECT * FROM OfficeTraining; 
@@ -60,7 +60,7 @@ SELECT * FROM EmployeeTrainingPayroll;
 
 #1
 SELECT Name, ot.Description as Cargo, 
-		Wage as Salário, etp.PayDate as DataPagamento, etp.AmountPaid as 'ValorPago', 
+		Wage as Salário, etp.PayDate as DataPagamento, etp.AmountPaid as ValorPago, 
         CONCAT(Format(((etp.AmountPaid * 100) / et.wage) - 100 , 2),'%') as 'Desconto %'
 FROM EmployeeTraining as et
 INNER JOIN OfficeTraining as ot ON ot.Id = et.OfficeId
@@ -102,3 +102,10 @@ INNER JOIN EmployeeTrainingPayroll as etp ON etp.EmployeeTrainingId = et.Id
 WHERE timestampdiff(month, etp.PayDate, curdate()) <= 2 Group By Name having sum(et.wage) = sum(etp.AmountPaid);
 
 #5
+SELECT Name, ot.Description Cargo, 
+		  etp.PayDate as DataPagamento, Wage as Salário, etp.AmountPaid as ValorPago,
+        CONCAT(Format(((etp.AmountPaid * 100) / et.wage), 2),'%') as 'PercentualRecebido'
+FROM EmployeeTraining as et
+INNER JOIN OfficeTraining as ot ON ot.Id = et.OfficeId
+INNER JOIN EmployeeTrainingPayroll as etp ON etp.EmployeeTrainingId = et.Id
+WHERE etp.PayDate >= DATE_ADD(NOW(), INTERVAL -3 MONTH);
