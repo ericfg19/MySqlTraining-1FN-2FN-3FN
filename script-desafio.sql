@@ -77,7 +77,7 @@ FROM EmployeeTraining where year(curdate()) - year(AdmissionDate) >= 10;
 
 #11
 #11.1 Item 1 para consultar os que tem contato
-SELECT Name, AdmissionDate, ot.Description, et.Id 
+SELECT distinct Name, AdmissionDate, ot.Description, et.Id 
 FROM EmployeeTraining as et
 INNER JOIN OfficeTraining as ot ON ot.Id = et.OfficeId
 INNER JOIN EmployeeTrainingContact as etc ON et.Id = etc.EmployeeTrainingId
@@ -105,3 +105,9 @@ INNER JOIN EmployeeTraining et ON et.OfficeId = ot.id
 GROUP BY st.id, et.wage;
 
 #14
+SELECT et.Name as Nome,
+	   ot.Description as Cargo,
+       eti.name as 'Indicado Por'
+FROM employeetraining et
+INNER JOIN OfficeTraining ot On ot.id = et.OfficeId
+INNER JOIN Employeetraining eti On et.IndicatedBy = eti.Id;
