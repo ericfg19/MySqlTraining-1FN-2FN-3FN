@@ -182,4 +182,4 @@ INSERT INTO EmployeeTrainingContact (EmployeeTrainingId, Type, Contact, MainCont
 	VALUES (18, 3, '21997979797', 1);
 
 #
-SELECT * FROM EmployeeTrainingoContact;
+SELECT * FROM EmployeeTrainingContact;
