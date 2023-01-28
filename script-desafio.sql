@@ -52,10 +52,10 @@ INNER JOIN SectorTraining as st ON st.Id = ot.SectorId
 Group By ot.SectorId;
 
 #7
-SELECT et.Id, Name, ot.Description, ec.Contact 
+SELECT Name, ot.Description, etc.Contact 
 FROM EmployeeTraining as et
 INNER JOIN OfficeTraining as ot ON ot.Id = et.OfficeId
-INNER JOIN EmployeeTrainingContact as etc ON etc.Id = ec.EmployeeTrainingId
+INNER JOIN EmployeeTrainingContact as etc ON etc.Id = etc.EmployeeTrainingId
 Group By etc.Id;
 
 #8
@@ -91,11 +91,11 @@ LEFT JOIN EmployeeTrainingContact etc ON etc.EmployeeTrainingId = et.id
 WHERE etc.id IS NULL;
 
 #12
-SELECT et.Name, ot.Description, et.Contact
+SELECT Name, ot.Description, etc.Contact
 FROM EmployeeTraining et
 INNER JOIN OfficeTraining ot ON ot.id = et.OfficeId
-LEFT JOIN EmployeeTrainingContact etc ON etc.EmployeeTrainingId = et.id
-WHERE etc.Contact = 1;
+LEFT JOIN EmployeeTrainingContact etc ON etc.EmployeeTrainingId = et.Id
+WHERE etc.MainContact = 1;
 
 #13
 SELECT st.description, SUM(et.Wage) as salarios 
